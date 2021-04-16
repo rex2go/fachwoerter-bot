@@ -14,6 +14,9 @@ class FachwoerterBot:
                                                   passwd=config['DB_PASSWORD'], db=config['DB_DATABASE'])
         self.cursor = self.get_cursor()
 
+    def __del__(self):
+        self.connection.close()
+
     def get_cursor(self):
         cursor = self.connection.cursor(dictionary=True)
         cursor.execute("SELECT id FROM `cursor`")
